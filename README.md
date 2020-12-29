@@ -1,62 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# URL Shortener
+================
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About the application
 
-## About Laravel
+This project consists of building a website that functions as a URL Shortener. The principle of a URL shortener is to reduces the length of any link to chain of characters, but still have that string redirecting to the original link. The criteria for the current application are as follow:
+	- A user should be able to load the index page of your site and be presented with an input field where they can enter a URL.
+	- Upon entering the URL, a "shortened" version of that url is created and shown to the user.
+	- When visiting that "shortened" version of the URL, the user is redirected to the original URL.
+	- Additionally, if a URL has already been shortened by the system, and it is entered a second time, the first shortened URL should be given back to the user.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+For example, if I enter `http://google.com/` into the input field, and I'm running the app locally on port 8000, I'd expect to be given back a URL that looked something like http://localhost:8000/1. Then when I visit `http://localhost:8000/1`, I am redirected to `http://google.com/`.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The sections below describe the steps that lead to the final application.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## How to use
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Clone the repository with git clone
+Copy .env.example file to .env and edit database credentials there
+Run composer install
+Run php artisan key:generate
+Run npm install
+Run npm run dev
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Implemention of the key functionalities
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Requirements
+	The technologies needed for this website are:
+		- Laravel
+		- Composer
+		- PHP 7.4
+		- Bootstap
+		- Vue.js
+		- Axios vform
+		_ VS Code as IDE
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+### Creation of the project with composer
+``` composer create-project --prefer-dist laravel/laravel urlshortener```
+And run ``` npm install ``` to create the dependencies.
+Run also ``` npm install vue-router ``` to add that package to the project.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Configuration of Vue-Router
+Define the skeleton of the application in the `resources/js/app.js` file and define a vue in the `resources/js/views` folder, FormUrl.vue, that shows the form that reads the URL to shorten and displays the shortened link.
 
-## Code of Conduct
+### Setup of the database
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Creation of a model to store the URL and a migration for it
+: ```php artisan make:model Link -m```
 
-## Security Vulnerabilities
+Addition of 2 fields (original_link and short_link) to the :
+:	 - newly creation migration file under database/migration
+	```
+	 public function up()
+	    {
+	        Schema::create('links', function (Blueprint $table) {
+	            $table->id();
+	            $table->string('original_link');
+	            $table->string('short_link);
+	            $table->timestamps();
+	        });
+	    }
+	    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+:	- model (Link) file
+		```
+		class Urls extends Model
+			{
+			    /**
+			     * The attributes that are mass assignable.
+			     *
+			     * @var array
+			     */
+			    protected $fillable = [
+			        'original_link,
+			        'short_link'
+			    ];
+			}
+			```
 
-## License
+Setting up the MySQL Database
+:	a- Create the MySQL Database
+		```mysql -u root -p```
+		enter your password when prompted
+		create database urlshortener;
+:	b- Create a new user
+		```CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';```
+:	c-grant permission to the new user to access new database
+		```GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON urlshortener.* TO 'admin'@'localhost';```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Update .env and set the database credentials
+: ```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=urlshortener
+DB_USERNAME=admin
+DB_PASSWORD=secret
+```
+
+
+Run ```php artisan migrate``` for the changes to be taken into account
+
+
+### Routes
+
+In Laravel 8, the following instruction is commented in the App/Providers/RouteServiceProvider.php file. When the site is launched, it throws the error "Target class [LinkController] does not exist". The commented line should then be uncommented to solve the issue.
+
+In the routes/api.php file, 
+: create a route named `index` that links to the index method in the LinkController
+	```Route::get('/','LinkController@index');```
+: create a route named `shorten` that routes to the function that shorthen URLs:
+	```Route::post('/shorten','LinkController@shorten');```
+: create a route named 'fetchURL' that redirects the short link to the actual URL:
+	```Route::post('/{link}','LinkController@fetchURL');```
+
+### Controller
+
+ The next step is to create a controller (LinkController) where the methods declared in the routes/api.php are defined.
+
+ ``` php artisan make:controller LinkController ```
+
+ The created controller is located at `App/Http/Controllers/LinkController.php`.
+
+ The index function is created afterwards in the App/Http/Controllers/LinkController.php to display the main page.
+
+The next step is to create the form that will process the links. this is done in the file resources/views/welcome.blade.php

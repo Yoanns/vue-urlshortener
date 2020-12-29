@@ -14,25 +14,44 @@ class LinkController extends Controller
     }
 
     public function shorten(Request $request){
+
+        $data = $request->validate([
+            'original_link' => 'required|url'
+        ]);
+
+        $query = DB::table('links')->where('original_link','=',$data['original_link']);
+
+        if ($query->exists()) {
+            $arr = explode('/',$query->value('short_link'));
+            $code = $arr[3];
+            return response()->json([
+                'short_link' => $query->value('short_link'),
+                'code' => $code
+            ],200);
+
+       } else {
         $random =Str::random(3);
 
-        DB::table('urls')->insert([
-            'original_url' => $request['originalurl'],
-            'short_url' => URL::to('/') . '/' . $random,
+        DB::table('links')->insert([
+            'original_link' => $data['original_link'],
+            'short_link' => URL::to('/') . '/' . $random,
             'created_at' => date('Y-m-d H:i:s')
         ]) ;
 
-        $shortened = URL::to('/') . '/' . $random;
+        return response()->json([
+            'short_link' => URL::to('/') . '/' . $random,
+            'code' => $random
+        ],201);
+       }
 
-        return $shortened;
     }
 
     public function fetchURL($link){
-        $short_url = URL::to('/') . '/' . $link;
-        $query = DB::table('urls')->where('short_url','=',$short_url);
+        $short_link = URL::to('/') . '/' . $link;
+        $query = DB::table('links')->where('short_link','=',$short_link);
 
         if ($query->exists()) {
-            return  redirect($query->value('original_url'));
+            return  redirect($query->value('original_link'));
         } else {
             return redirect('/');
         }

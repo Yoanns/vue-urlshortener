@@ -6,22 +6,16 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import App from './views/App'
-import Shorten from './views/Shorten'
-import Home from './views/Home'
+import FormUrl from './views/FormUrl'
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: Home
-        },
-        {
-            path: '/shorten',
-            name: 'shorten.index',
-            component: Shorten,
-        },
+            name: 'formUrl',
+            component: FormUrl,
+        }
     ],
 });
 
