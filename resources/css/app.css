@@ -1,0 +1,15 @@
+.blue {
+    background-color: #088BEC;
+    color: #fff;
+}
+
+.blue-text {
+    color: #088BEC;
+}
+
+.shape {
+    border-radius: 22px;
+    background: linear-gradient(145deg, #fbfbfb, #d4d4d4);
+    box-shadow:  23px 23px 32px #cccccc,
+                -23px -23px 32px #ffffff;
+}

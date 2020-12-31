@@ -1,5 +1,4 @@
 # URL Shortener
-================
 
 ## About the application
 
@@ -93,18 +92,16 @@ Setting up the MySQL Database
 
 
 Update .env and set the database credentials
-: ```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=urlshortener
-DB_USERNAME=admin
-DB_PASSWORD=secret
-```
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=urlshortener
+    DB_USERNAME=admin
+    DB_PASSWORD=secret
+    ```
 
-
-Run ```php artisan migrate``` for the changes to be taken into account
-
+Run ```php artisan migrate``` for the changes to be taken into account.
 
 ### Routes
 

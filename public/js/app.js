@@ -1917,6 +1917,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -1957,6 +1966,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1965,6 +1989,7 @@ __webpack_require__.r(__webpack_exports__);
       active: false,
       short_link: '',
       code: '',
+      url: '',
       form: new vform__WEBPACK_IMPORTED_MODULE_1___default.a({
         original_link: ''
       })
@@ -1978,6 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.short_link = data.data['short_link'];
         _this.code = data.data['code'];
       });
+      this.url = this.form.original_link;
       this.active = true;
       this.form.reset();
     }
@@ -20656,10 +20682,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("URL Shortener")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+  return _c("div", { staticClass: "row justify-content-md-center my-5" }, [
+    _c("div", { staticClass: "col-md-auto clearfix" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "my-8 py-3 bg-white dark:bg-gray-800 overflow-hidden shape sm:rounded-lg"
+        },
+        [
+          _c("img", {
+            staticClass: "rounded mx-auto d-block",
+            attrs: {
+              src: "img/link_shortener.svg",
+              width: "40%",
+              alt: "link_shortener.svg"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "row my-2 p-3" }),
+          _vm._v(" "),
+          _c("h1", { staticClass: "text-center blue-text" }, [
+            _vm._v("URL Shortener")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -20685,54 +20735,85 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit($event)
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.original_link,
-                expression: "form.original_link"
-              }
-            ],
-            attrs: {
-              name: "original_link",
-              type: "URL",
-              required: "",
-              placeholder: "Please enter URL to shorten"
-            },
-            domProps: { value: _vm.form.original_link },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "original_link", $event.target.value)
-              }
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "form",
+        {
+          staticClass: "row m-3",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.onSubmit($event)
             }
-          }),
-          _vm._v(" "),
-          _c("button", { attrs: { type: "submit" } }, [
-            _vm._v("\n              Shorten\n          ")
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "row m-3 align-items-center" }, [
+              _c("div", { staticClass: "input-group mb-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.original_link,
+                      expression: "form.original_link"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "original_link",
+                    type: "URL",
+                    required: "",
+                    placeholder: "Please enter the URL to shorten"
+                  },
+                  domProps: { value: _vm.form.original_link },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "original_link", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-secondary blue",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Shorten\n                        "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm.active
+      ? _c("div", { staticClass: "row m-3", attrs: { id: "result" } }, [
+          _c("div", { staticClass: "text-center py-3" }, [
+            _c("p", [
+              _vm._v("The link "),
+              _c("code", { staticClass: ".fw-bold " }, [
+                _vm._v(" " + _vm._s(_vm.url) + " ")
+              ]),
+              _vm._v(" has been shortened to : ")
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: _vm.code, target: "new" } }, [
+              _vm._v(" " + _vm._s(_vm.short_link) + " ")
+            ])
           ])
         ])
-      ]
-    ),
-    _vm._v(" "),
-    _c("a", { attrs: { href: _vm.code } }, [
-      _vm._v(" " + _vm._s(_vm.short_link) + " ")
-    ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
