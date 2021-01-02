@@ -3,6 +3,7 @@
 ## About the application
 
 This project consists of building a website that functions as a URL Shortener. The principle of a URL shortener is to reduces the length of any link to chain of characters, but still have that string redirecting to the original link. The criteria for the current application are as follow:
+
 	- A user should be able to load the index page of your site and be presented with an input field where they can enter a URL.
 	- Upon entering the URL, a "shortened" version of that url is created and shown to the user.
 	- When visiting that "shortened" version of the URL, the user is redirected to the original URL.
@@ -26,17 +27,17 @@ Run npm run dev
 ## Implemention of the key functionalities
 
 ### Requirements
-The technologies needed for this website are:
-    - Laravel
-    - Composer
-    - PHP 7.4
-    - Bootstap
-    - Vue.js
-    - Vue Test Utils
-    - Jest
-    - Vue-Jest
-    - Babel-Jest
-    - Axios vform
+    The technologies needed for this website are:
+        - Laravel
+        - Composer
+        - PHP 7.4
+        - Bootstap
+        - Vue.js
+        - Vue Test Utils
+        - Jest
+        - Vue-Jest
+        - Babel-Jest
+        - Axios vform
 
 
 ### Creation of the project with composer
@@ -84,17 +85,18 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
 			```
 
 - [X] Setting up the MySQL Database
-	a- Create the MySQL Database
+
+	a. Create the MySQL Database
 		```mysql -u root -p```
 		enter your password when prompted
 		create database urlshortener;
 
-	b- Create a new user
+	b. Create a new user
 		```
 		CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
 		```
 
-	c-grant permission to the new user to access new database
+	c. grant permission to the new user to access new database
 		```
 		GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON urlshortener.* TO 'admin'@'localhost';
 		```
