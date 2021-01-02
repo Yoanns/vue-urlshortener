@@ -26,21 +26,21 @@ Run npm run dev
 ## Implemention of the key functionalities
 
 ### Requirements
-	The technologies needed for this website are:
-		- Laravel
-		- Composer
-		- PHP 7.4
-		- Bootstap
-		- Vue.js
-		- Vue Test Utils
-		- Jest
-		- Vue-Jest
-		- Babel-Jest
-		- Axios vform
+The technologies needed for this website are:
+    - Laravel
+    - Composer
+    - PHP 7.4
+    - Bootstap
+    - Vue.js
+    - Vue Test Utils
+    - Jest
+    - Vue-Jest
+    - Babel-Jest
+    - Axios vform
 
 
 ### Creation of the project with composer
-``` composer create-project --prefer-dist laravel/laravel urlshortener```
+` composer create-project --prefer-dist laravel/laravel urlshortener`
 And run ``` npm install ``` to create the dependencies.
 Run also ``` npm install vue-router ``` to add that package to the project.
 
@@ -54,8 +54,8 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
  ```php artisan make:model Link -m```
 
 - [X] Addition of 2 fields (original_link and short_link) to the :
-	 - newly creation migration file under database/migration
-	```
+    - newly creation migration file under database/migration
+    ```
 	 public function up()
 	    {
 	        Schema::create('links', function (Blueprint $table) {
@@ -65,9 +65,9 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
 	            $table->timestamps();
 	        });
 	    }
-	    ```
+       ```
 
-	- model (Link) file
+    - model (Link) file
 		```
 		class Urls extends Model
 			{
