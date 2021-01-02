@@ -44,7 +44,6 @@ Run npm run dev
 And run ``` npm install ``` to create the dependencies.
 Run also ``` npm install vue-router ``` to add that package to the project.
 
-
 ### Configuration of Vue-Router
 Define the skeleton of the application in the `resources/js/app.js` file and define a vue in the `resources/js/views` folder, FormUrl.vue, that shows the form that reads the URL to shorten and displays the shortened link.
 
