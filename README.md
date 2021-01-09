@@ -3,6 +3,7 @@
 ## About the application
 
 This project consists of building a website that functions as a URL Shortener. The principle of a URL shortener is to reduces the length of any link to chain of characters, but still have that string redirecting to the original link. The criteria for the current application are as follow:
+
 	- A user should be able to load the index page of your site and be presented with an input field where they can enter a URL.
 	- Upon entering the URL, a "shortened" version of that url is created and shown to the user.
 	- When visiting that "shortened" version of the URL, the user is redirected to the original URL.
@@ -15,32 +16,32 @@ The sections below describe the steps that lead to the final application.
 
 ## How to use
 
-Clone the repository with git clone
-Copy .env.example file to .env and edit database credentials there
-Run composer install
-Run php artisan key:generate
-Run npm install
-Run npm run dev
+- [X] Clone the repository with git clone
+- [X] Copy .env.example file to .env and edit database credentials there
+- [X] Run composer install
+- [X] Run php artisan key:generate
+- [X] Run npm install
+- [X] Run npm run dev
 
 
 ## Implemention of the key functionalities
 
 ### Requirements
-	The technologies needed for this website are:
-		- Laravel
-		- Composer
-		- PHP 7.4
-		- Bootstap
-		- Vue.js
-		- Vue Test Utils
-		- Jest
-		- Vue-Jest
-		- Babel-Jest
-		- Axios vform
+    The technologies needed for this website are:
+        - Laravel
+        - Composer
+        - PHP 7.4
+        - Bootstap
+        - Vue.js
+        - Vue Test Utils
+        - Jest
+        - Vue-Jest
+        - Babel-Jest
+        - Axios vform
 
 
 ### Creation of the project with composer
-``` composer create-project --prefer-dist laravel/laravel urlshortener```
+` composer create-project --prefer-dist laravel/laravel urlshortener`
 And run ``` npm install ``` to create the dependencies.
 Run also ``` npm install vue-router ``` to add that package to the project.
 
@@ -53,8 +54,8 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
  ```php artisan make:model Link -m```
 
 - [X] Addition of 2 fields (original_link and short_link) to the :
-	 - newly creation migration file under database/migration
-	```
+    - newly creation migration file under database/migration
+    ```
 	 public function up()
 	    {
 	        Schema::create('links', function (Blueprint $table) {
@@ -64,9 +65,9 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
 	            $table->timestamps();
 	        });
 	    }
-	    ```
+       ```
 
-	- model (Link) file
+    - model (Link) file
 		```
 		class Urls extends Model
 			{
@@ -83,17 +84,18 @@ Define the skeleton of the application in the `resources/js/app.js` file and def
 			```
 
 - [X] Setting up the MySQL Database
-	a- Create the MySQL Database
+
+	a. Create the MySQL Database
 		```mysql -u root -p```
 		enter your password when prompted
 		create database urlshortener;
 
-	b- Create a new user
+	b. Create a new user
 		```
 		CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
 		```
 
-	c-grant permission to the new user to access new database
+	c. grant permission to the new user to access new database
 		```
 		GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON urlshortener.* TO 'admin'@'localhost';
 		```
