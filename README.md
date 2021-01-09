@@ -16,12 +16,12 @@ The sections below describe the steps that lead to the final application.
 
 ## How to use
 
-Clone the repository with git clone
-Copy .env.example file to .env and edit database credentials there
-Run composer install
-Run php artisan key:generate
-Run npm install
-Run npm run dev
+- [X] Clone the repository with git clone
+- [X] Copy .env.example file to .env and edit database credentials there
+- [X] Run composer install
+- [X] Run php artisan key:generate
+- [X] Run npm install
+- [X] Run npm run dev
 
 
 ## Implemention of the key functionalities
